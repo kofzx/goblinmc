@@ -1,0 +1,52 @@
+<h2 class="search-title">GoblinMusic</h2>
+<div class="search-wrapper">
+    <form id="search-form" action="">
+        <div class="row" style="justify-content: space-between;">
+            <div class="col-9">
+                <input 
+                    type="text" 
+                    class="search-input form-control" 
+                    id="musicValue" 
+                    placeholder="请输入您想听的歌曲"
+                    autocomplete="off">
+            </div>
+            <button type="submit" class="search-go">Go</button>
+        </div>
+    </form>
+    <p class="message-result"></p>
+</div>
+
+<script>
+    $(function() {
+        var $searchForm = $('#search-form')
+        var $musicValue = $('#musicValue')
+        var $messageResult = $('.message-result')
+        var $container = $('<%= containerSelector%>')
+
+        $searchForm.on('submit', function(e) {
+            e.preventDefault()
+            var musicVal = $musicValue.val().trim()
+
+            // 验证
+            if (musicVal.length === 0) {
+                return
+            }
+
+            // 搜索
+            ajax.post('/api/searchMusicByKeyWord', {
+                key: musicVal
+            }, function (err, data) {
+                if (err) {
+                    $container.html('')
+                    $messageResult.text(err)
+                    return
+                }
+                
+                $messageResult.text('')
+                var $itemList = $(data.musicListTpl)
+
+                $container.html($itemList)
+            })
+        })
+    })
+</script>

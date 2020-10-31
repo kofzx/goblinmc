@@ -1,0 +1,174 @@
+body {
+  padding: 0;
+  margin: 0;
+  --main-color: #bedbbb;
+  --secondary-color: #8db596;
+  --assist-brown: #92817a;
+  --assist-grey: #707070;
+}
+
+textarea {
+  border: 0;
+  resize: none;
+  outline: none;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+.margin-top-20 {
+  margin-top: 20px;
+}
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+.margin-left-10 {
+  margin-left: 10px;
+}
+
+.padding-bottom-10 {
+  padding-bottom: 10px;
+}
+.padding-bottom-20 {
+  padding-bottom: 20px;
+}
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.clear-fix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.search-title {
+  font-size: 28px;
+  color: var(--main-color);
+  font-weight: bold;
+  text-align: center;
+  margin-top: 50px;
+}
+.search-wrapper {
+  width: 85%;
+  height: 50px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 12px;
+  margin: 24px auto;
+}
+.search-wrapper .search-input {
+  height: 46px;
+  color: var(--assist-grey);
+  border-radius: 12px;
+  font-size: 14px;
+}
+.search-wrapper .search-go {
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-right: 24px;
+  border: none;
+}
+.music-list-wrapper {
+  width: 85%;
+  margin: 0 auto;
+}
+.music-list-wrapper .music-item {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #dfdfdf;
+  justify-content: space-between;
+}
+.music-list-wrapper .music-name {
+  font-size: 16px;
+  color: #323232;
+  margin-bottom: 4px;
+}
+.music-list-wrapper .artist-name {
+  font-size: 12px;
+  color: #636363;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.music-list-wrapper .music-download {
+  color: #939393;
+  margin-top: 6px;
+  margin-right: 14px;
+}
+.message-result {
+  font-size: 14px;
+  color: #818181;
+  margin-top: 10px;
+  padding-left: 6px;
+}
+.qrcode-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.7);
+}
+.qrcode-mask > .qrcode-image {
+  width: 50vw;
+  height: 50vw;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+.login-form {
+  padding: 0 40px;
+  margin-top: 30px;
+}
+.login-button {
+  display: block;
+  background: var(--secondary-color);
+  width: 100%;
+  border-radius: 24px;
+  margin: 50px auto 0;
+  padding: 0.6rem 0.75rem;
+}
+.login-button:hover,
+.login-button:active,
+.login-button.active,
+.login-button:focus {
+  background: var(--secondary-color) !important;
+}
+.login-tips {
+  font-size: 14px;
+  color: #818181;
+}
+.horizontal-line {
+  width: 100%;
+  height: 1px;
+  background: #dfdfdf;
+}
+.result-text {
+  font-size: 16px;
+  color: #323232;
+  text-align: center;
+  margin-top: 30px;
+}

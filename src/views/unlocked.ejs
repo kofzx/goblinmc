@@ -1,0 +1,27 @@
+<%- include('layout/header')%>
+
+<% if (!locals.ismanager) { %>
+    <p class="margin-top-20">您不是管理员，请直接访问<a href="/">首页</a></p>
+<% } else { %>
+    <p class="result-text">共计：<%= locals.count%>首</p>
+    <button id="unlocked-button" class="login-button btn btn-primary" style="width: 80%;margin-top: 26px;">确定</button>
+
+    <script>
+        $(function() {
+            var $unlockedButton = $('#unlocked-button')
+            $unlockedButton.on('click', function() {
+                ajax.post('/api/user/changeUnlocked', {
+                    id: '<%= locals.uid%>',
+                    unlocked: 1
+                }, function(err, data) {
+                    if (err) {
+                        alert('发送错误，请重试')
+                        return
+                    }
+                })
+            })
+        })
+    </script>
+<% } %>
+
+<%- include('layout/footer')%>

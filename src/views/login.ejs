@@ -1,0 +1,76 @@
+<%- include('layout/header')%>
+
+<% if (locals.isLogin) { %>
+    <p class="margin-top-20"><%= locals.username%> 您已成功登录，请直接访问<a href="/">首页</a></p>
+<% } else { %>
+    <h2 class="search-title">GoblinMusic</h2>
+    <div class="login-form">
+        <form>
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="input-username" 
+                    placeholder="用户名" 
+                    autocomplete="off"
+                    style="padding-left: 0;"
+                >
+                <p class="horizontal-line"></p>
+            </div>
+            <div class="form-group">
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="input-password" 
+                    placeholder="密码" 
+                    autocomplete="off"
+                    style="padding-left: 0;"
+                >
+                <p class="horizontal-line"></p>
+            </div>
+            <p class="login-tips">7天内免登录</p>
+            <button type="submit" class="login-button btn btn-primary" id="btn-submit">登录</button>
+        </form>
+    </div>
+
+    <script>
+        $(function() {
+            var $inputUsername = $('#input-username')
+            var $inputPassword = $('#input-password')
+            $('#btn-submit').click(function(e) {
+                // 阻止默认的提交表单行为
+                e.preventDefault()
+                const username = $inputUsername.val()
+                const password = $inputPassword.val()
+
+                // 验证
+                if (username.length === 0) {
+                    alert('请填写用户名')
+                    return
+                }
+                if (password.length === 0) {
+                    alert('请填写密码')
+                    return
+                }
+
+                // 提交数据
+                ajax.post('/api/user/login', {
+                    username,
+                    password
+                }, function(err, data) {
+                    if (err) {
+                        alert(err)
+                        return
+                    }
+                    // $.query来源于query-object.js
+                    // http://localhost:3000/login?url=xxxx
+                    // 跳转到指定 url 或首页
+                    var redirectUrl = $.query.get('url') || '/'
+                    location.href = redirectUrl
+                })
+            })
+        })
+    </script>
+<% } %>
+
+<%- include('layout/footer')%>

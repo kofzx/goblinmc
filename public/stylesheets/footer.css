@@ -1,0 +1,8 @@
+.footer-wrapper {
+  background: #999999;
+}
+.footer-wrapper .text {
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+}

@@ -1,0 +1,77 @@
+<% musicList.forEach(item => { %>
+    <div class="music-item row">
+        <div class="col-8">
+            <p class="music-name"><%= item.name%></p>
+            <p class="artist-name"><%= item.artist%></p>
+        </div>
+        <div class="music-download" data-sourcename="<%= item.sourcename%>">
+            <svg 
+                width="1.4em" 
+                height="1.4em" 
+                viewBox="0 0 16 16" 
+                class="bi bi-download" 
+                fill="currentColor" 
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+            </svg>
+        </div>
+    </div>
+<% }) %>
+
+<script>
+    $(function() {
+        var timer, unlocked
+
+        $('.music-download').on('click', function() {
+            var sourcename = $(this).data('sourcename')
+            
+            // 获取游客用户信息
+            ajax.get('/api/user/info?id=<%= locals.uid%>', function(err, data) {
+                if (err) {
+                    return
+                }
+
+                unlocked = data.unlocked
+                if (!unlocked) {
+                    // 获取二维码图片
+                    ajax.get(`/api/user/qrcode?id=<%= locals.uid%>&count=1`, function(err, data) {
+                        var $qrcodeTpl = $(data.qrcodeTpl)
+                        var selectorContainer = data.selectorContainer
+
+                        $('body').append($qrcodeTpl)
+
+                        // 发起轮询，等待管理员解锁
+                        timer = setInterval(function() {
+                            if (unlocked) {
+                                clearInterval(timer)
+                                // 移除二维码遮罩
+                                $(selectorContainer).remove()
+                                
+                                // 继续锁定游客状态
+                                ajax.post('/api/user/changeUnlocked', {
+                                    id: '<%= locals.uid%>',
+                                    unlocked: 0
+                                }, function(err, data) {
+
+                                })
+
+                                return
+                            }
+
+                            // 获取游客用户信息
+                            ajax.get('/api/user/info?id=<%= locals.uid%>', function(err, data) {
+                                if (err) {
+                                    return
+                                }
+
+                                unlocked = data.unlocked
+                            })
+                        }, 3000)
+                    })
+                }
+            })
+        })
+    })
+</script>
