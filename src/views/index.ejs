@@ -1,11 +1,33 @@
 <%- include('layout/header')%>
 
 <%- include('widgets/search-wrapper', {
-    containerSelector: '#musicListWrapper'
+    containerSelector: '#musicListWrapper',
+    uid: userInfo.id
 })%>
 
 <div id="musicListWrapper" class="music-list-wrapper">
     
 </div>
+
+<script>
+    $(function() {
+        // 获取游客用户信息
+        ajax.get('/api/user/info?id=<%= locals.userInfo.id%>', function(err, data) {
+            if (err) {
+                return
+            }
+
+            if (data.unlocked) {
+                // 锁定游客状态
+                ajax.post('/api/user/changeUnlocked', {
+                    id: '<%= locals.userInfo.id%>',
+                    unlocked: 0
+                }, function(err, data) {
+
+                })
+            }
+        })
+    })
+</script>
 
 <%- include('layout/footer')%>

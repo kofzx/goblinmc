@@ -4,6 +4,8 @@
  */
 
 const { User } = require('../db/model/index')
+const Sequelize = require('sequelize')
+const seq = require('../db/seq')
 
 /**
  * 佛系获取用户信息
@@ -51,43 +53,20 @@ async function createUser(id) {
 
 /**
  * 更新用户信息
- * @param  {Object} param0    要修改的内容 { newUnlocked, newUsername, newPassword, newMobile }
- * @param  {Object} param1    查询条件 { id, username }
+ * @param  {Object} param0    要修改的内容 { newUnlocked }
+ * @param  {Object} param1    查询条件 { id }
  */
 async function updateUser(
-	{ newUnlocked, newUsername, newPassword, newMobile },
-	{ id, username }
+	{ newUnlocked },
+	{ id }
 ) {
-    // 拼接修改内容
-	const updateData = {}
-	if (newPassword) {
-		updateData.password = newPassword
-	}
-	if (newUsername) {
-		updateData.username = newUsername
-	}
-	if (newUnlocked) {
-		updateData.unlocked = newUnlocked
-	}
-	if (newMobile) {
-		updateData.mobile = newMobile
-	}
-
-	// 拼接查询条件
-    const whereData = {}
-    if (id) {
-		whereData.id = id
-	}
-	if (username) {
-		whereData.username = username
-	}
-
-	// 执行修改
-	const result = await User.update(updateData, {
-		where: whereData
+	// 因莫名原因，使用Sequelize模型更新表字段值为0时会失败，就用了原生sql更新
+	const result = await seq.query('update users set unlocked = :unlocked where id = :id', {
+		replacements: { id: id, unlocked: newUnlocked  },
+		type: Sequelize.QueryTypes.UPDATE
 	})
-	console.log(result)
-	return result[0] > 0
+	
+	return result[1] > 0
 }
 
 module.exports = {

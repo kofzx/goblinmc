@@ -48,8 +48,8 @@
                                 clearInterval(timer)
                                 // 移除二维码遮罩
                                 $(selectorContainer).remove()
-                                
-                                // 继续锁定游客状态
+
+                                // 锁定游客状态
                                 ajax.post('/api/user/changeUnlocked', {
                                     id: '<%= locals.uid%>',
                                     unlocked: 0
