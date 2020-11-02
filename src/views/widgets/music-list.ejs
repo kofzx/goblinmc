@@ -49,6 +49,15 @@
                                 // 移除二维码遮罩
                                 $(selectorContainer).remove()
 
+                                
+                                var linkFilename = sourcename + '.mp3'
+                                var linkUrl = '/downloads/' + linkFilename
+
+                                // 开始下载
+                                loadFile(linkUrl, function(blobUri) {
+                                    downloadFn(blobUri, linkFilename)
+                                })
+
                                 // 锁定游客状态
                                 ajax.post('/api/user/changeUnlocked', {
                                     id: '<%= locals.uid%>',
