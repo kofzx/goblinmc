@@ -22,8 +22,8 @@ router.get('/info', async (ctx, next) => {
 
 // 获取二维码信息
 router.get('/qrcode', async (ctx, next) => {
-    const { id, count } = ctx.request.query
-    const result = await getQrcode(id, count)
+    const { id, mid, count } = ctx.request.query
+    const result = await getQrcode(id, mid, count)
     if (result && result.data) {
         // 渲染模板
         result.data.qrcodeTpl = getQrcodeStr(result.data.qrcodeImageUrl)

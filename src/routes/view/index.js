@@ -52,11 +52,12 @@ router.get('/login', async (ctx, next) => {
 })
 
 router.get('/unlocked', loginRedirect, async (ctx, next) => {
-	const { id: uid, count } = ctx.request.query
+	const { id: aid, mid, count } = ctx.request.query
 	const { ismanager } = ctx.session.userInfo
 	
 	await ctx.render('unlocked', {
-		uid,
+		aid,
+		mid,
 		count,
 		ismanager
 	})

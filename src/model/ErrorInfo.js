@@ -44,4 +44,9 @@ module.exports = {
         errno: 10008,
         message: '密码不能为空'
     },
+    // 创建订单失败
+    createOrderFailInfo: {
+        errno: 10009,
+        message: '创建订单失败'
+    },
 }

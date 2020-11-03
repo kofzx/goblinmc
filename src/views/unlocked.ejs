@@ -10,13 +10,29 @@
         $(function() {
             var $unlockedButton = $('#unlocked-button')
             $unlockedButton.on('click', function() {
-                ajax.post('/api/user/changeUnlocked', {
-                    id: '<%= locals.uid%>',
-                    unlocked: 1
-                }, function(err, data) {
+                // 获取游客用户信息
+                ajax.get('/api/user/info?id=<%= locals.aid%>', function(err, data) {
                     if (err) {
-                        alert('发送错误，请重试')
                         return
+                    }
+                    if (!data.unlocked) {
+                        // 解锁客户
+                        ajax.post('/api/user/changeUnlocked', {
+                            id: '<%= locals.aid%>',
+                            unlocked: 1
+                        }, function(err, data) {
+                            if (err) {
+                                alert('发送错误，请重试')
+                                return
+                            }
+                            // 录入订单
+                            ajax.post('/api/order/createOrder', {
+                                mid: '<%= locals.mid%>',
+                                count: '<%= locals.count%>'
+                            }, function(err, data) {
+                                
+                            })
+                        })
                     }
                 })
             })

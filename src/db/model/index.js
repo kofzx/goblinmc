@@ -5,8 +5,10 @@
 
 const User = require('./User')
 const Music = require('./Music')
+const Order = require('./Order')
 
 module.exports = {
     User,
-    Music
+    Music,
+    Order
 }

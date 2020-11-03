@@ -11,8 +11,11 @@ const { SuccessModel } = require('../model/ResModel')
 
 /**
  * 获取二维码
+ * @param {string} id 游客id
+ * @param {string} mid 音乐id
+ * @param {string} count 下单数量
  */
-async function getQrcode(id, count) {
+async function getQrcode(id, mid, count) {
     let _path = '/qrcode/'
     let imgName = `${id}.png`
 
@@ -22,7 +25,7 @@ async function getQrcode(id, count) {
         })
     }
 
-    generatorQrImage(IMG_URL + `/unlocked?id=${id}&count=${count}`, '/public' + _path + imgName)
+    generatorQrImage(IMG_URL + `/unlocked?id=${id}&mid=${mid}&count=${count}`, '/public' + _path + imgName)
 
     return new SuccessModel({
         qrcodeImageUrl: IMG_URL + _path + imgName

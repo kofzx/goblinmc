@@ -15,6 +15,7 @@ const { SESSION_SECRET_KEY } = require('./src/conf/secretKeys')
 
 const searchApiRouter = require('./src/routes/api/search')
 const userApiRouter = require('./src/routes/api/user')
+const orderApiRouter = require('./src/routes/api/order')
 const indexViewRouter = require('./src/routes/view/index')
 const errorViewRouter = require('./src/routes/view/error')
 
@@ -65,6 +66,7 @@ app.use(session({
 // routes
 app.use(searchApiRouter.routes(), searchApiRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
+app.use(orderApiRouter.routes(), orderApiRouter.allowedMethods())
 app.use(indexViewRouter.routes(), indexViewRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 

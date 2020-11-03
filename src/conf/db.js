@@ -29,7 +29,7 @@ if (isProd) {
 		user: 'root',
 		password: 'root',
 		port: '3306',
-		database: 'goblinmc_db'
+		database: 'goblinmc_db',
 	}
 }
 
