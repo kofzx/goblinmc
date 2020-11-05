@@ -47,7 +47,7 @@ router.get('/', async (ctx, next) => {
   	await ctx.render('welcome', {})
 })
 
-router.get('/index', async (ctx, next) => {
+router.get('/home', async (ctx, next) => {
 	await ctx.render('index', getUserInfo(ctx))
 })
 
