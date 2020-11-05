@@ -11,6 +11,13 @@
 
 <script>
     $(function() {
+        // 微信浏览器处理
+        var ua = navigator.userAgent.toLowerCase()
+        if (ua.match(/MicroMessenger/i)=="micromessenger") {
+            $('body').append($('<h2 class="wx-tips-text">由于微信不支持用户下载，请在浏览器中打开</h2><div class="qrcode-mask"><img class="wx-tips-img" src="/images/tips.png" alt=""></div>'))
+            return
+        }
+        
         // 获取游客用户信息
         ajax.get('/api/user/info?id=<%= locals.userInfo.id%>', function(err, data) {
             if (err) {
