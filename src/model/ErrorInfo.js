@@ -7,7 +7,7 @@ module.exports = {
 	// 歌曲不存在
     searchFailInfo: {
         errno: 10001,
-        message: '未找到该歌曲，请联系技术人员'
+        message: '小库没有该歌曲o(╥﹏╥)o，可联系客服，微信号：xuyf000'
     },
     // 注册失败
     registerFailInfo: {
