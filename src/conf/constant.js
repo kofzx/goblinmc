@@ -8,7 +8,7 @@ const { isProd } = require('../utils/env')
 let IMG_URL = 'http://localhost:3000'
 
 if (isProd) {
-    IMG_URL = 'http://localhost:3000'
+    IMG_URL = 'http://www.goblinmc.com/'
 }
 
 module.exports = {
