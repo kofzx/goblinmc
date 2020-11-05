@@ -44,11 +44,11 @@ function getLoginInfo(ctx) {
 }
 
 router.get('/', async (ctx, next) => {
-  	await ctx.render('welcome', {})
+  	await ctx.render('welcome')
 })
 
 router.get('/home', async (ctx, next) => {
-	await ctx.render('index', getUserInfo(ctx))
+	await ctx.render('home', getUserInfo(ctx))
 })
 
 router.get('/login', async (ctx, next) => {
