@@ -44,7 +44,11 @@ function getLoginInfo(ctx) {
 }
 
 router.get('/', async (ctx, next) => {
-  	await ctx.render('index', getUserInfo(ctx))
+  	await ctx.render('welcome', {})
+})
+
+router.get('/index', async (ctx, next) => {
+	await ctx.render('index', getUserInfo(ctx))
 })
 
 router.get('/login', async (ctx, next) => {

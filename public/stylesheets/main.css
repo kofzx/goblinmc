@@ -92,6 +92,7 @@ textarea {
 .music-list-wrapper {
   width: 85%;
   margin: 0 auto;
+  padding-top: 10px;
 }
 .music-list-wrapper .music-item {
   padding-bottom: 12px;
@@ -138,6 +139,17 @@ textarea {
   left: 50%;
   top: 50%;
   transform: translate3d(-50%, -50%, 0);
+}
+.wx-tips-text {
+  font-size: 24px;
+  text-indent: 24px;
+  color: #323232;
+  margin-top: 20px;
+}
+.wx-tips-img {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .login-form {
   padding: 0 40px;

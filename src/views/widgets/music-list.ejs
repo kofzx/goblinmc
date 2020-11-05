@@ -48,6 +48,7 @@
                     ajax.get('/api/user/qrcode?id=<%= locals.uid%>&mid=' + mid + '&count=1', function(err, data) {
                         var $qrcodeTpl = $(data.qrcodeTpl)
                         var selectorContainer = data.selectorContainer
+                        var resultMessageContainer = data.resultMessageContainer
 
                         $('body').append($qrcodeTpl)
 
@@ -60,6 +61,9 @@
 
                                 // 开始下载
                                 _download()
+
+                                // 提示消息
+                                $(resultMessageContainer).text('已开始下载，请耐心等待，过程可能要30秒左右...')
 
                                 // 锁定游客状态
                                 ajax.post('/api/user/changeUnlocked', {
