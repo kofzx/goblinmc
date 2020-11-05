@@ -8,7 +8,9 @@ const { loginRedirect } = require('../../middlewares/loginChecks')
  * @param  {Object} ctx ctx
  */
 function getUserInfo(ctx) {
-	if (ctx.session.userInfo == null) {
+	var ua = navigator.userAgent.toLowerCase()
+	// 没有账户切不是在微信浏览器下
+	if (ctx.session.userInfo == null && !ua.match(/MicroMessenger/i)=="micromessenger") {
 		// 创建新用户
 		let uid = uuidv4()
 		ctx.session.userInfo = {
