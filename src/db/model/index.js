@@ -6,9 +6,11 @@
 const User = require('./User')
 const Music = require('./Music')
 const Order = require('./Order')
+const Feedback = require('./Feedback')
 
 module.exports = {
     User,
     Music,
-    Order
+    Order,
+    Feedback
 }

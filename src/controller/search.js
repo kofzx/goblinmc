@@ -4,6 +4,7 @@
  */
 
 const { getMusicList } = require('../services/search')
+const { createFeedback } = require('../services/feedback')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { searchFailInfo } = require('../model/ErrorInfo')
 
@@ -18,6 +19,7 @@ async function searchMusicByKeyWord(key) {
             musicList
         })
 	} else {
+		await createFeedback(key)
 		return new ErrorModel(searchFailInfo)
 	}
 }
