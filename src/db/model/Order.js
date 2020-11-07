@@ -15,12 +15,10 @@ const Order = seq.define('order', {
     },
     uid: {
         type: STRING,
-        unique: true,
         comment: '管理员id',
     },
     mid: {
         type: STRING,
-        unique: true,
         comment: '音乐id'
     },
     count: {
