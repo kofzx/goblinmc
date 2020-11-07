@@ -68,7 +68,7 @@ textarea {
   height: 50px;
   border: 2px solid var(--secondary-color);
   border-radius: 12px;
-  margin: 24px auto;
+  margin: 24px auto 12px;
 }
 .search-wrapper .search-input {
   height: 46px;
@@ -88,6 +88,7 @@ textarea {
   margin-top: 5px;
   margin-right: 24px;
   border: none;
+  -webkit-appearance: none;
 }
 .music-list-wrapper {
   width: 85%;
@@ -121,8 +122,8 @@ textarea {
   font-size: 14px;
   color: #818181;
   line-height: 1.8;
-  margin-top: 10px;
-  padding-left: 6px;
+  margin: 10px 0;
+  padding: 0 34px;
 }
 .qrcode-mask {
   position: absolute;

@@ -2,8 +2,11 @@
 
 <%- include('widgets/search-wrapper', {
     containerSelector: '#musicListWrapper',
+    resultMessageContainer: '.message-result',
     uid: userInfo.id
 })%>
+
+<p class="message-result"></p>
 
 <div id="musicListWrapper" class="music-list-wrapper d-md-none">
     

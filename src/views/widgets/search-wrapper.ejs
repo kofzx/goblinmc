@@ -13,14 +13,13 @@
             <button type="submit" class="search-go">Go</button>
         </div>
     </form>
-    <p class="message-result"></p>
 </div>
 
 <script>
     $(function() {
         var $searchForm = $('#search-form')
         var $musicValue = $('#musicValue')
-        var $messageResult = $('.message-result')
+        var $messageResult = $('<%= resultMessageContainer%>')
         var $container = $('<%= containerSelector%>')
 
         $searchForm.on('submit', function(e) {

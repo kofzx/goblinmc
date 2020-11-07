@@ -63,7 +63,7 @@
                                 _download()
 
                                 // 提示消息
-                                $(resultMessageContainer).text('已开始下载，请耐心等待，过程可能要30秒左右...')
+                                $(resultMessageContainer).text('已开始下载，请耐心等待，过程可能要持续1分钟左右...')
 
                                 // 锁定游客状态
                                 ajax.post('/api/user/changeUnlocked', {
