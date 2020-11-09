@@ -25,7 +25,6 @@
                                 alert('发生错误，请重试')
                                 return
                             }
-                            alert('解锁成功，等待数秒后请手动关闭此页面')
                             // 录入订单
                             ajax.post('/api/order/createOrder', {
                                 mid: '<%= locals.mid%>',
@@ -33,6 +32,7 @@
                             }, function(err, data) {
                                 
                             })
+                            alert('解锁成功，等待数秒后请手动关闭此页面')
                         })
                     }
                 })
