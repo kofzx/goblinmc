@@ -8,6 +8,7 @@ const logger = require('koa-logger')
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 const koaStatic = require('koa-static')
+const cors = require('koa-cors')
 
 const { REDIS_CONF } = require('./src/conf/db')
 const { isProd } = require('./src/utils/env')
@@ -29,6 +30,7 @@ if (isProd) {
 onerror(app, onerrorConf)
 
 // middlewares
+app.use(cors())
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
