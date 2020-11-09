@@ -23,6 +23,9 @@
 <script>
     $(function() {
         var timer, unlocked
+        var progressBox = document.getElementById('progressBox')
+        var progressBar = document.getElementById('progressBar')
+        var progressText = document.getElementById('progressText')
 
         $('.music-download').on('click', function() {
             var sourcename = $(this).data('sourcename')
@@ -30,11 +33,29 @@
             var linkFilename = sourcename + '.mp3'
             var linkUrl = '/downloads/' + linkFilename
 
+            function loadProgressBar() {
+                progressBox.style.display = 'block'
+
+                var xhr = new XMLHttpRequest()
+                xhr.open('GET', linkUrl, true)
+                xhr.addEventListener('progress', function (event) {
+                    if (event.lengthComputable) {
+                        var percentComplete = event.loaded / event.total
+                        var percent = percentComplete * 100
+                        progressBar.style.transform = 'translate3d(' + (percent - 100) + '%,0,0)'
+                        progressText.innerText =  Math.round(percent) + '%'
+                    }
+                }, false)
+                xhr.send()
+            }
+
             function _download() {
                 loadFile(linkUrl, function(blobUri) {
                     downloadFn(blobUri, linkFilename)
                 })
+                loadProgressBar()
             }
+            
             
             // 获取游客用户信息
             ajax.get('/api/user/info?id=<%= locals.uid%>', function(err, data) {
@@ -48,7 +69,6 @@
                     ajax.get('/api/user/qrcode?id=<%= locals.uid%>&mid=' + mid + '&count=1', function(err, data) {
                         var $qrcodeTpl = $(data.qrcodeTpl)
                         var selectorContainer = data.selectorContainer
-                        var resultMessageContainer = data.resultMessageContainer
 
                         $('body').append($qrcodeTpl)
 
@@ -61,9 +81,6 @@
 
                                 // 开始下载
                                 _download()
-
-                                // 提示消息
-                                $(resultMessageContainer).text('已开始下载，请耐心等待，过程可能要持续1分钟左右...')
 
                                 // 锁定游客状态
                                 ajax.post('/api/user/changeUnlocked', {

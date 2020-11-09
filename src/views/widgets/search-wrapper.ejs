@@ -17,10 +17,15 @@
 
 <script>
     $(function() {
+        var progressBox = document.getElementById('progressBox')
         var $searchForm = $('#search-form')
         var $musicValue = $('#musicValue')
         var $messageResult = $('<%= resultMessageContainer%>')
         var $container = $('<%= containerSelector%>')
+
+        function hideProgress() {
+            progressBox.style.display = 'none'
+        }
 
         $searchForm.on('submit', function(e) {
             e.preventDefault()
@@ -38,10 +43,12 @@
                 if (err) {
                     $container.html('')
                     $messageResult.text(err)
+                    hideProgress()
                     return
                 }
                 
                 $messageResult.text('')
+                hideProgress()
                 var $itemList = $(data.musicListTpl)
 
                 $container.html($itemList)

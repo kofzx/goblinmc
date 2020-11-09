@@ -28,7 +28,6 @@ router.get('/qrcode', async (ctx, next) => {
         // 渲染模板
         result.data.qrcodeTpl = getQrcodeStr(result.data.qrcodeImageUrl)
         result.data.selectorContainer = '.qrcode-mask'
-        result.data.resultMessageContainer = '.message-result'
     }
     ctx.body = result
 })
